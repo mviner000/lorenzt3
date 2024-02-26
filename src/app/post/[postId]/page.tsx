@@ -18,7 +18,7 @@ const Page = async ({ params }: PageProps) => {
   const postResponse = await api.post.getById.query({ id: parseInt(postId, 10) });
   const post: Post = postResponse; // Assuming response directly contains the post details
 
-  if (!post || !post.id) {
+  if (!post?.id) {
     return notFound();
   }
 
