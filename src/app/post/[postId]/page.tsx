@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { api } from '~/trpc/server';
 
 interface Post {
-  id: number;
+  id_string: string;
   name: string;
 }
 
@@ -15,10 +15,10 @@ interface PageProps {
 const Page = async ({ params }: PageProps) => {
   const { postId } = params;
 
-  const postResponse = await api.post.getById.query({ id: parseInt(postId, 10) });
+  const postResponse = await api.post.getById.query({ id_string: postId });
   const post: Post = postResponse; // Assuming response directly contains the post details
 
-  if (!post?.id) {
+  if (!post?.id_string) {
     return notFound();
   }
 
